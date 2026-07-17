@@ -1,0 +1,93 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.flash-message{
+    max-width:650px;
+    margin:0 auto 1rem auto;
+}
+.container {
+    flex: 1;
+    padding-left: 15px;    
+  padding-right: 15px;
+}
+
+
+
+/* Tax Toggle */
+.tax-info {
+    display: none;
+    font-weight: 500;
+}
+
+.base-price {
+    display: inline;
+}
+
+.tax-label {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+
+
+
+/* Wishlist */
+.wishlist-btn{
+    background:white;
+    border:none;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:1.4rem;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+
+    opacity:1;
+    transition:.25s;
+}
+
+.wishlist-btn:hover{
+    transform:scale(1.12);
+}
+
+
+
+
+
+/* Pagination */
+.custom-pagination{
+    gap:.45rem;
+}
+
+.custom-pagination .page-link{
+    border:none;
+    border-radius:50px;
+    color:#222;
+    padding:.65rem 1rem;
+    font-weight:600;
+    transition:.25s;
+}
+
+.custom-pagination .page-link:hover{
+    background:#ff385c;
+    color:white;
+}
+
+.custom-pagination .page-item.active .page-link{
+    background:#ff385c;
+    color:white;
+}
+
+.custom-pagination .page-item.disabled .page-link{
+    color:#999;
+    background:#f5f5f5;
+}

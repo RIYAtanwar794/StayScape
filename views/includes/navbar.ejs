@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="/listings">
+      <i class="fa-regular fa-compass me-2"></i>
+
+      <div class="brand-box">
+        <span class="brand-title">StayScape</span>
+        <small class="brand-subtitle">Explore • Stay • Travel</small>
+      </div>
+    </a>
+
+    <!-- Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <!-- Search -->
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex search-form" role="search" method="GET" action="/listings">
+          <input class="form-control me-2 search-inp" type="search" name="search"
+            placeholder="Search by title, location or country"
+            value="<%= typeof search !== 'undefined' ? search : '' %>" required />
+
+          <input type="hidden" name="category"
+            value="<%= (typeof selectedCategory !== 'undefined' && selectedCategory !== 'All') ? selectedCategory : '' %>" />
+
+          <button class="btn btn-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Right -->
+      <div class="navbar-nav ms-auto">
+
+        <a class="nav-link" href="/listings/new">
+          List Your Property
+        </a>
+
+        <% if(!currUser){ %>
+
+          <a class="nav-link" href="/signup">
+            <b>Sign up</b>
+          </a>
+
+          <a class="nav-link" href="/login">
+            <b>Log in</b>
+          </a>
+
+          <% } %>
+
+            <% if(currUser){ %>
+
+              <a class="nav-link dashboard-link" href="/dashboard">
+                <i class="fa-solid fa-user me-1"></i>
+                Dashboard
+              </a>
+
+              <a class="nav-link dashboard-link" href="/wishlist">
+                ❤️ Wishlist
+              </a>
+
+              <a class="nav-link" href="/logout">
+                <b>Log out</b>
+              </a>
+
+              <% } %>
+
+      </div>
+
+    </div>
+
+  </div>
+</nav>

@@ -1,0 +1,230 @@
+
+/* ================= FILTER BAR ================= */
+
+#filters {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* categories container */
+
+.filters-scroll {
+  display: flex;
+  align-items: center;
+  gap: 1.7rem;         
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  padding: 0.4rem 0;   
+}
+
+.filters-scroll::-webkit-scrollbar {
+    height: 6px; 
+}
+
+.filters-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.filters-scroll::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+}
+
+.filters-scroll::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+/* each category */
+.filter-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 0 0 auto;
+}
+
+.filter {
+    text-align: center;
+    opacity: .7;
+    transition: .2s;
+}
+
+.filter:hover {
+    opacity: 1;
+}
+
+.filter p {
+    font-size: .8rem;
+    margin-top: .4rem;
+    margin-bottom: 0;
+}
+
+.filter i {
+    font-size: 1.2rem;
+}
+
+.active-filter {
+    color: #fe424d !important;
+}
+
+.active-filter .filter {
+    opacity: 1;
+}
+
+.active-filter p {
+    font-weight: 600;
+}
+
+/* sort + tax */
+.filters-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    flex-wrap: nowrap; 
+}
+
+.tax-toggle {
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    padding: .6rem 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* ================= RESPONSIVE FILTER BAR ================= */
+
+@media (max-width: 992px) {
+    #filters {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .filters-scroll {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+
+        gap: 1.8rem;
+
+        width: 100%;
+        padding-bottom: .4rem;
+
+        scrollbar-width: thin;
+    }
+
+    .filter-link {
+        flex: 0 0 auto;
+    }
+
+    .filters-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap; 
+    }
+
+    .filters-actions form {
+        flex: 1;
+    }
+
+    .sort-dropdown {
+        width: 100%;
+    }
+
+    .tax-toggle {
+        flex-shrink: 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .filters-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filters-actions form {
+        width: 100%;
+    }
+
+    .sort-dropdown {
+        width: 100%;
+    }
+
+    .tax-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .filters-scroll {
+        scrollbar-width: thin; 
+    }
+    .filters-scroll::-webkit-scrollbar {
+        height: 4px;
+    }
+}
+
+.filters-actions {
+    position: relative;   
+    overflow: visible;    
+}
+
+.sort-dropdown .btn {
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 0.6rem 0.9rem;  
+  background: #fff;
+  font-weight: 500;
+  color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 130px;         
+  transition: all .25s ease;
+  margin-left: 2rem;       
+}
+
+.sort-dropdown .btn i {
+  margin-left: 0.35rem;    
+  font-size: 0.9rem;
+}
+
+.tax-toggle {
+  margin-left: 1.5rem;     
+}
+
+.dropdown-menu {
+    position: absolute;   
+    left: 0;              
+    right: 0;            
+    z-index: 9999;        
+    max-width: 100%;     
+    box-sizing: border-box;
+    overflow-x: hidden;   
+}
+
+
+.sort-dropdown .btn:focus,
+.sort-dropdown .btn:active {
+  outline: none;
+  border-color: #ff385c; 
+  box-shadow: 0 0 8px 3px rgba(194, 62, 87, 0.35); 
+}
+
+.tax-toggle:focus,
+.tax-toggle:active {
+  outline: none;
+  border-color: #ff385c; 
+  box-shadow: 0 0 8px 3px rgba(194, 62, 87, 0.35);
+}
+

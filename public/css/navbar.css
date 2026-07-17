@@ -1,0 +1,151 @@
+.brand-box{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+}
+
+.brand-title{
+    font-size:1.45rem;
+    font-weight:800;
+    color:#ff385c;
+}
+
+.brand-subtitle{
+    font-size:.65rem;
+    color:#777;
+    letter-spacing:1px;
+}
+
+
+/* =========================
+        NAVBAR
+========================= */
+
+.fa-compass{
+    color:#fe424d;
+    font-size:2rem;
+}
+
+.navbar{
+    height:4.8rem;
+    background:white;
+    box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+
+.navbar-brand{
+    font-size:2rem;
+    color:#ff385c !important;
+}
+
+.navbar-brand:hover{
+    color:#e03150 !important;
+}
+
+.navbar-nav{
+    align-items:center;
+}
+
+.nav-link{
+    color:#222 !important;
+    font-weight:500;
+    margin:0 .35rem;
+    transition:.25s;
+}
+
+.nav-link:not(.dashboard-link):not(.wishlist-link):hover{
+    color:#ff385c !important;
+}
+
+
+/* =========================
+        SEARCH BAR
+========================= */
+
+.search-form{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+}
+
+.search-inp{
+    width:360px;
+    min-width:360px;
+    height:48px;
+
+    border-radius:999px;
+    padding:0 1.2rem;
+
+    border:1px solid #ddd;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.search-inp:focus{
+    border-color:#ff385c;
+    box-shadow:0 0 0 .2rem rgba(255,56,92,.15);
+}
+
+.btn-search{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#ff385c;
+    color:#fff !important;
+
+    border:none;
+    border-radius:999px;
+
+    height:48px;
+    padding:0 1.3rem;
+
+    white-space:nowrap;
+
+    transition:.25s;
+}
+
+.btn-search:hover{
+    background:#e03150;
+    color:#fff !important;
+    transform:translateY(-1px);
+}
+
+.btn-search i{
+    display:inline;
+    margin-right:.45rem;
+}
+
+
+/* =========================
+      SEARCH RESULT
+========================= */
+
+.search-result-heading{
+    margin-top:1.5rem;
+    margin-bottom:.8rem;
+    font-weight:600;
+}
+
+
+/* =========================
+      RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+    .search-form{
+        width:100%;
+        margin:1rem 0;
+    }
+
+    .search-inp{
+        width:100%;
+        min-width:0;
+        flex:1;
+    }
+
+    .btn-search{
+        flex-shrink:0;
+    }
+
+}

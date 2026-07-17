@@ -1,0 +1,56 @@
+/* Show Page */
+.btns {
+    display: flex;
+}
+
+.show-btn {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.show-card{
+    border:none !important;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.show-img{
+    height:40vh;
+    object-fit:cover;
+}
+
+.show-card .card-body{
+    padding:1.6rem;
+}
+
+.listing-owner,
+.listing-price,
+.listing-location
+.listing-description{
+    font-size:1.05rem;
+    margin-bottom:0.7rem !important;
+}
+
+.listing-price{
+    font-size:1.3rem;
+    font-weight:700;
+    color:#ff385c;
+}
+
+.listing-description{
+    margin-top:1.2rem;
+    line-height:1.8;
+    color:#555;
+}
+
+.listing-divider{
+    margin:1.5rem 0;
+    opacity:.15;
+}
+
+.alert{
+    border:none;
+    border-radius:14px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}

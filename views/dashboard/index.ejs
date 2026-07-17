@@ -1,0 +1,118 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="container mt-4 dashboard">
+        <div class="dashboard-header">
+            <h2>
+                👋 Welcome back,
+                <%= currUser.username %>
+            </h2>
+
+            <p class="text-muted">
+                Manage your StayScape account
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card dashboard-card">
+                    <div class="card-body mt-3">
+                        <i class="fa-solid fa-house dashboard-icon"></i>
+                        <h3>My Listings</h3>
+
+                        <p class="dashboard-description">
+                            Manage all the stays you've shared with travellers.
+                        </p>
+
+                        <div class="dashboard-count">
+                            <%= totalListings %>
+                        </div>
+
+                        <p class="dashboard-label">
+                            Total Listings
+                        </p>
+
+                        <a href="/dashboard/my-listings" class="btn btn-dark dashboard-btn mb-3">
+                            Manage Listings
+                            <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Wishlist -->
+            <div class="col-lg-6">
+                <div class="card dashboard-card">
+                    <div class="card-body mt-3">
+                        <i class="fa-solid fa-heart dashboard-icon wishlist-icon"></i>
+
+                        <h3>My Wishlist</h3>
+
+                        <p class="dashboard-description">
+                            Explore and manage your favourite saved stays.
+                        </p>
+
+                        <div class="dashboard-count">
+                            <%= wishlistCount %>
+                        </div>
+
+                        <p class="dashboard-label">
+                            Saved Listings
+                        </p>
+
+                        <a href="/wishlist" class="btn btn-dark dashboard-btn mb-3">
+                            Open Wishlist
+                            <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="text-center my-5">
+            <a href="/listings/new" class="btn btn-danger create-listing-btn">
+                ➕ Create New Listing
+            </a>
+        </div>
+
+
+        <% if(recentListings.length> 0) { %>
+            <h3 class="recent-listings">
+                My Recent Listings
+            </h3>
+
+            <p class="text-muted mb-4">
+                The latest stays you've added.
+            </p>
+
+            <div class="row row-cols-lg-3 row-cols-md-2 g-4">
+                <% recentListings.forEach(listing=> { %>
+                    <div class="col">
+                        <a href="/listings/<%= listing._id %>" class="listing-link">
+                            <div class="card listing-card">
+
+                                <img src="<%= listing.image.url %>" class="card-img-top" style="height:220px;">
+
+                                <div class="card-body">
+                                    <h5>
+                                        <%= listing.title %>
+                                    </h5>
+                                    <p>
+                                        ₹ <%= listing.price.toLocaleString("en-IN") %>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } else { %>
+                <div class="text-center py-5">
+                    <i class="fa-solid fa-house-circle-exclamation fa-3x text-secondary mb-3"></i>
+                    <h4>No listings yet</h4>
+                    <p class="text-muted">
+                        Start hosting by creating your first listing.
+                    </p>
+                </div>
+                <% } %>
+    </div>

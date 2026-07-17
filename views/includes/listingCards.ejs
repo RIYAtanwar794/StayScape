@@ -1,0 +1,50 @@
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 mt-0">
+    <% for(let listing of allListings) { %>
+        <div class="col">
+            <div class="card listing-card">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height:20rem">
+                    <div class="card-img-overlay d-flex justify-content-end align-items-start">
+                        <% if(removeButton) { %>
+                            <form action="/wishlist/<%= listing._id %>" method="POST">
+                                <input type="hidden" name="redirectUrl" value="/wishlist">
+                                <button type="submit" class="wishlist-btn">
+                                    ❤️
+                                </button>
+                            </form>
+                            <% } %>
+                    </div>
+                </a>
+
+                <div class="card-body">
+                    <a href="/listings/<%= listing._id %>" class="listing-link">
+                        <p class="card-text">
+                            <b>
+                                <%= listing.title %>
+                            </b><br>
+
+                            <span class="base-price">
+                                &#8377;
+                                <%= listing.price.toLocaleString("en-IN") %>
+                                    / night
+                            </span>
+
+                            <span class="tax-info">
+                                &#8377;
+                                <%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %>
+                                    / night
+                                    <br>
+
+                                    <small class="tax-label">
+                                        Includes all taxes
+                                    </small>
+
+                            </span>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+</div>

@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="container mt-4 dashboard">
+        <div class="dashboard-header">
+            <h2>
+                🏡 My Listings
+            </h2>
+            <p class="text-muted">
+                Manage and update all your published stays.
+            </p>
+        </div>
+
+        <% if(listings.length> 0) { %>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="/dashboard" class="btn btn-outline-dark">
+                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    Dashboard
+                </a>
+
+                <% if(listings.length> 0) { %>
+                    <a href="/listings/new" class="btn btn-danger create-listing-btn">
+                        ➕ Create Listing
+                    </a>
+                    <% } %>
+            </div>
+            <% } %>
+
+
+                <% if(listings.length===0) { %>
+                    <div class="text-center py-5">
+                        <i class="fa-solid fa-house-circle-exclamation fa-3x text-secondary mb-3"></i>
+                        <h4>You haven't created any listings yet.</h4>
+                        <p class="text-muted">
+                            Start hosting by creating your first listing.
+                        </p>
+                        <a href="/listings/new" class="btn btn-danger">
+                            Create Listing
+                        </a>
+                    </div>
+                    <% } else { %>
+                        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+                            <% listings.forEach(listing=> { %>
+                                <div class="col">
+                                    <a href="/listings/<%= listing._id %>" class="listing-link">
+                                        <div class="card listing-card">
+                                            <img src="<%= listing.image.url %>" class="card-img-top"
+                                                style="height:20rem">
+
+                                            <div class="card-body">
+                                                <h5>
+                                                    <%= listing.title %>
+                                                </h5>
+
+                                                <p class="mb-1">
+                                                    ₹
+                                                    <%= listing.price.toLocaleString("en-IN") %>
+                                                        / night
+                                                </p>
+
+                                                <small class="text-muted">
+                                                    <%= listing.location %>,
+                                                        <%= listing.country %>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } %>
+
+    </div>

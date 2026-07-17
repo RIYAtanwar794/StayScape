@@ -1,0 +1,185 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div id="filters" class="mb-4">
+
+        <div class="filters-scroll">
+
+            <a href="/listings?<%= selectedSort ? 'sort=' + selectedSort : '' %><%= search ? (selectedSort ? '&' : '') + 'search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'All' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-border-all"></i></div>
+                    <p>All</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Trending<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Trending' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Beaches<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Beaches' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <p>Beaches</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Cities<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Cities' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Cities</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Mountains<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Mountains' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain"></i></div>
+                    <p>Mountains</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Villas<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Villas' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-house"></i></div>
+                    <p>Villas</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Camping<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Camping' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p>Camping</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Heritage<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Heritage' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Heritage</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Wildlife<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Wildlife' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-cow"></i></div>
+                    <p>Wildlife</p>
+                </div>
+            </a>
+
+            <a href="/listings?category=Luxury<%= selectedSort ? '&sort=' + selectedSort : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>"
+                class="filter-link <%= selectedCategory === 'Luxury' ? 'active-filter' : '' %>">
+                <div class="filter">
+                    <div><i class="fa-solid fa-gem"></i></div>
+                    <p>Luxury</p>
+                </div>
+            </a>
+
+        </div>
+
+
+
+        <div class="filters-actions">
+
+            <!-- Sort dropdown -->
+            <div class="dropdown sort-dropdown" data-bs-display="static">
+                <button class="btn btn-light dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                    Sort By
+                </button>
+                <ul class="dropdown-menu w-100">
+                    <li><a class="dropdown-item"
+                            href="/listings?sort=lowToHigh<%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>">
+                            Price: Low to High
+                        </a></li>
+                    <li><a class="dropdown-item"
+                            href="/listings?sort=highToLow<%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>">
+                            Price: High to Low
+                        </a></li>
+                    <li><a class="dropdown-item"
+                            href="/listings?sort=aToZ<%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>">
+                            A - Z
+                        </a></li>
+                    <li><a class="dropdown-item"
+                            href="/listings?sort=zToA<%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %>">
+                            Z - A
+                        </a></li>
+                </ul>
+            </div>
+
+            <!-- Tax toggle -->
+            <div class="tax-toggle">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switchCheckDefault">
+                    <label class="form-check-label" for="switchCheckDefault">
+                        Display total after taxes
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <% if (typeof search !=="undefined" && search.trim() !=="" ) { %>
+        <% if (allListings.length> 0) { %>
+            <h5 class="search-result-heading">
+                Showing <%= allListings.length %>
+                    result<%= allListings.length> 1 ? "s" : "" %>
+                        for "<%= search %>"
+            </h5>
+            <% } else { %>
+                <h5 class="search-result-heading">
+                    No listings found for "<%= search %>"
+                </h5>
+                <% } %>
+                    <% } %>
+
+                        <%- include("../includes/listingCards.ejs",{removeButton:false}) %>
+
+                            <% if(totalPages> 1) { %>
+                                <nav class="mt-5 d-flex justify-content-center">
+                                    <ul class="pagination custom-pagination">
+                                        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                                            <a class="page-link"
+                                                href="/listings?page=<%= currentPage - 1 %><%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %><%= selectedSort ? '&sort=' + selectedSort : '' %>">
+
+                                                ← Prev
+                                            </a>
+                                        </li>
+
+                                        <% for(let i=1; i <=totalPages; i++) { %>
+                                            <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                                                <a class="page-link"
+                                                    href="/listings?page=<%= i %><%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %><%= selectedSort ? '&sort=' + selectedSort : '' %>">
+
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                            <% } %>
+
+                                                <li
+                                                    class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                                                    <a class="page-link"
+                                                        href="/listings?page=<%= currentPage + 1 %><%= selectedCategory !== 'All' ? '&category=' + selectedCategory : '' %><%= search ? '&search=' + encodeURIComponent(search) : '' %><%= selectedSort ? '&sort=' + selectedSort : '' %>">
+
+                                                        Next →
+                                                    </a>
+                                                </li>
+                                    </ul>
+                                </nav>
+                                <% } %>
+
+                                
+    <script src="/js/taxToggle.js"></script>

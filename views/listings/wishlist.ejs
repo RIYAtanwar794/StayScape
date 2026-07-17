@@ -1,0 +1,30 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container">
+
+        <h2 class="mt-4 mb-2">❤️ My Wishlist</h2>
+
+        <p class="text-muted mb-4">
+            Your favourite stays, all in one place.
+        </p>
+
+        <% if(allListings.length===0) { %>
+
+            <div class="text-center mt-5">
+                <h4>Your wishlist is empty.</h4>
+                <p class="text-muted">
+                    Start exploring amazing stays and save your favourites.
+                </p>
+
+                <a href="/listings" class="btn btn-dark mt-2">
+                    Explore Listings
+                </a>
+            </div>
+
+            <% } else { %>
+
+                <%- include("../includes/listingCards.ejs",{removeButton:true}) %>
+
+            <% } %>
+
+    </div>
