@@ -1,6 +1,6 @@
 # 🏡 StayScape — Full-Stack Property Listing Platform
 
-StayScape is a full-stack property listing platform that enables users to discover, list, and manage accommodations through a secure and responsive web application. Built using the **MVC (Model–View–Controller)** architecture, the platform provides an intuitive user experience with authentication, interactive maps, wishlists, reviews, and cloud-based image storage.
+StayScape is a full-stack property listing platform that enables users to discover, list, and manage accommodations through a secure and responsive web application. Built using the **MVC (Model–View–Controller)** architecture, it provides a secure and responsive experience with authentication, property management, interactive maps, wishlists, reviews, and cloud-based image storage.
 
 
 ## 🌐 Live Demo
@@ -13,13 +13,13 @@ StayScape is a full-stack property listing platform that enables users to discov
 - 🔐 **Authentication & Authorization** — Secure signup/login with role-based ownership checks
 - 🏠 **Listings CRUD** — Create, edit, and delete property listings
 - ⭐ **Reviews & Ratings** — Add and manage reviews with star ratings
-- ❤️ **Wishlist** — Save favorite listings for quick access
+- ❤️ **Wishlist** — Save favorite properties for quick access
 - 📊 **Dashboard** — Manage personal listings and wishlist
 - 🗺️ **Interactive Maps** — Property locations powered by Leaflet
 - ☁️ **Cloudinary Uploads** — Secure image hosting and optimization
 - 📑 **Pagination & Filtering** — Server-side pagination with category filters and search
 - 📱 **Responsive UI** — Optimized for desktop and mobile devices
-- 🌐 **Cloud Deployment** — Deployed on Render with MongoDB Atlas
+- 🌐 **Deployment** — Deployed on Render with MongoDB Atlas
 
 
 ## 🛠️ Tech Stack
