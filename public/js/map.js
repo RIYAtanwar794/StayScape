@@ -1,4 +1,5 @@
-const coordinates = listing.geometry.coordinates;
+const coordinates = window.listing.geometry.coordinates;
+
 
 const customIcon = L.icon({
     iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
@@ -36,10 +37,10 @@ const marker = L.marker(
     .addTo(map)
     .bindPopup(`
         <div class="popup-card">
-            <h5>${listing.title}</h5>
+            <h5>${window.listing.title}</h5>
 
             <div class="popup-location">
-               📍 ${listing.location}
+               📍 ${window.listing.location}
             </div>
 
             <div class="popup-note">

@@ -24,6 +24,7 @@
     <link href="/css/newEditPage.css" rel="stylesheet" />
     <link href="/css/filter.css" rel="stylesheet" />
     <link href="/css/dashboard.css" rel="stylesheet" />
+    <link href="/css/mobileResponsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 
@@ -46,6 +47,15 @@
                 crossorigin="anonymous"></script>
             <script src="/js/script.js"></script>
             <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+            <% if (typeof listing !=="undefined" ) { %>
+                <script>
+                    window.listing = <%- JSON.stringify(listing) %>;
+                </script>
+                <script src="/js/map.js"></script>
+            <% } %>
+
 
 </body>
 

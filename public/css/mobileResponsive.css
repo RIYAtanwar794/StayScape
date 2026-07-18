@@ -1,0 +1,166 @@
+
+/* Mobile responsive fixes */
+@media (max-width: 576px) {
+
+  .show-card.listing-card {
+    width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 12px;
+    padding-left: 20px !important;   
+    padding-right: 10px; 
+  }
+
+
+  .show-img {
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .listing-owner,
+  .listing-price,
+  .listing-location,
+  .listing-description {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .show-card h3,
+  .listing-title {
+    text-align: left !important;
+    margin-left: 5px !important;
+    font-size: 18px;
+  }
+
+
+  .btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px; 
+    margin: 12px 0;
+  }
+  .btns .btn {
+    flex: 1;            
+    font-size: 14px;
+    padding: 10px 0;     
+    text-align: center;
+  }
+
+  .card.col-5 {
+    width: 100% !important;
+    margin: 8px 0 !important;
+  }
+
+ 
+  .filters-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .sort-dropdown,
+  .tax-toggle {
+    width: 100% !important;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .show-card h3,
+  .listing-title {
+    text-align: left !important;
+    margin-left: 0 !important;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .col-8.offset-3 {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+
+@media (max-width: 576px) {
+ 
+  .btns {
+    display: flex;
+    flex-direction: column;   
+    gap: 10px;                
+    margin: 12px 0;
+    width: 100%;
+  }
+
+  .btns .btn,
+  .btns form button {
+    width: calc(100% - 20px); 
+    margin: 0 auto;        
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    display: block;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .tax-toggle {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+}
+
+
+
+@media (max-width: 576px) {
+  .sort-dropdown {
+    width: 100% !important;
+    margin: 0;
+    padding: 0; 
+  }
+
+
+  .sort-dropdown .btn {
+    display: flex !important;          
+    justify-content: space-between;    
+    align-items: center;               
+    width: 100% !important;           
+    text-align: left !important;       
+    margin: 0 !important;
+    padding-left: 14px;
+    padding-right: 14px;
+    box-sizing: border-box;
+  }
+}
+
+
+@media (max-width: 576px) {
+  /* Review card spacing */
+  .review-card {
+    max-width: 90%;              
+    margin: 0 auto 12px auto;   
+    padding: 8px;              
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .review-card p,
+  .review-card .review-text {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .review-card .stars {
+    font-size: 14px;
+  }
+
+
+  .review-card button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+
+
