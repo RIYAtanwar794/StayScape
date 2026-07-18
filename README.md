@@ -13,12 +13,12 @@ StayScape is a full-stack property listing platform that enables users to discov
 - 🔐 **Authentication & Authorization** — Secure signup/login with role-based ownership checks
 - 🏠 **Listings CRUD** — Create, edit, and delete property listings
 - ⭐ **Reviews & Ratings** — Add and manage reviews with star ratings
-- ❤️ **Wishlist** — Save favorite properties for quick access
-- 📊 **Dashboard** — Manage personal listings and wishlist
+- ❤️ **Wishlist** — Save favorite property listings for quick access
+- 📊 **Dashboard** — Manage personal property listings and wishlist
 - 🗺️ **Interactive Maps** — Property locations powered by Leaflet
 - ☁️ **Cloudinary Uploads** — Secure image hosting and optimization
 - 📑 **Pagination & Filtering** — Server-side pagination with category filters and search
-- 📱 **Responsive UI** — Optimized for desktop and mobile devices
+- 📱 **Responsive UI** — Responsive design optimized for desktop and mobile devices
 - 🌐 **Deployment** — Deployed on Render with MongoDB Atlas
 
 
