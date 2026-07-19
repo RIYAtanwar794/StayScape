@@ -1,0 +1,22 @@
+<div class="col">
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+        <div class="card listing-card">
+            <img src="<%= listing.image.url %>" class="card-img-top" style="height:20rem">
+
+            <div class="card-body">
+                <h5>
+                    <%= listing.title %>
+                </h5>
+
+                <p class="mb-1">
+                    ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+                </p>
+
+                <small class="text-muted">
+                    <%= listing.location %>, <%= listing.country %>
+                </small>
+            </div>
+        </div>
+    </a>
+</div>
+
