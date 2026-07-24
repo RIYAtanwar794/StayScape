@@ -1,7 +1,7 @@
 const Listing = require("./models/listing.js");
 const Review = require("./models/review.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema , reviewSchema } = require("./schema.js");
+const { listingSchema, reviewSchema, bookingSchema } = require("./schema.js");
 
 
 
@@ -57,13 +57,12 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 
 
 module.exports.validateListing = (req, res, next) => {
-    let {error} = listingSchema.validate(req.body);
+    let { error } = listingSchema.validate(req.body);
 
-    if(error)
-    {
+    if (error) {
         let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400 , errMsg);
-    }else{
+        throw new ExpressError(400, errMsg);
+    } else {
         next();
     }
 };
@@ -71,13 +70,25 @@ module.exports.validateListing = (req, res, next) => {
 
 
 module.exports.validateReview = (req, res, next) => {
-    let {error} = reviewSchema.validate(req.body);
+    let { error } = reviewSchema.validate(req.body);
 
-    if(error)
-    {
+    if (error) {
         let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400 , errMsg);
-    }else{
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
+
+
+
+module.exports.validateBooking = (req, res, next) => {
+    let { error } = bookingSchema.validate(req.body);
+
+    if (error) {
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else {
         next();
     }
 };

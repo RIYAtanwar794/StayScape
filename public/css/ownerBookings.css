@@ -1,0 +1,23 @@
+.owner-booking-card{
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.owner-booking-img{
+    width:100%;
+    min-height:340px;
+    object-fit:cover;
+}
+
+.badge{
+    padding:8px 15px;
+    font-size:.9rem;
+}
+
+.card-body h3{
+    font-weight:700;
+}
+
+hr{
+    opacity:.15;
+}

@@ -1,0 +1,226 @@
+<% layout("/layouts/boilerplate") %>
+
+    <link rel="stylesheet" href="/css/bookingHistory.css">
+
+    <div class="container py-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">My Bookings</h2>
+                <p class="text-muted mb-0">
+                    View all your stay reservations.
+                </p>
+            </div>
+
+            <a href="/listings" class="btn btn-dark">
+                Explore More Stays
+            </a>
+        </div>
+
+        <% if(bookings.length===0){ %>
+
+            <div class="card shadow-sm border-0 text-center p-5">
+
+                <h3 class="mb-3">
+                    No Bookings Yet
+                </h3>
+
+                <p class="text-muted mb-4">
+                    Looks like you haven't booked any stay yet.
+                </p>
+
+                <a href="/listings" class="btn btn-dark">
+                    Browse Listings
+                </a>
+
+            </div>
+
+            <% } else { %>
+
+                <% bookings.forEach((booking)=>{ %>
+
+                    <div class="card shadow-sm border-0 mb-4 booking-card">
+
+                        <div class="row g-0">
+
+                            <div class="col-md-4">
+
+                                <img src="<%= booking.listing.image.url %>" class="img-fluid booking-img h-100"
+                                    alt="Listing Image">
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-between align-items-start">
+
+                                        <div>
+
+                                            <h3 class="mb-2">
+                                                <%= booking.listing.title %>
+                                            </h3>
+
+                                            <p class="text-muted mb-3">
+                                                📍
+                                                <%= booking.listing.location %>,
+                                                    <%= booking.listing.country %>
+                                            </p>
+
+                                        </div>
+
+                                        <% if(booking.status==="Pending" ){ %>
+
+                                            <span class="badge bg-warning text-dark">
+                                                Pending
+                                            </span>
+
+                                            <% } else if(booking.status==="Confirmed" ){ %>
+
+                                                <span class="badge bg-success">
+                                                    Confirmed
+                                                </span>
+
+                                                <% } else if(booking.status==="Completed" ){ %>
+
+                                                    <span class="badge bg-primary">
+                                                        Completed
+                                                    </span>
+
+                                                    <% } else { %>
+
+                                                        <span class="badge bg-danger">
+                                                            Cancelled
+                                                        </span>
+
+                                                        <% } %>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Check-In</strong>
+
+                                            <p>
+                                                <%= booking.checkIn.toLocaleDateString("en-IN") %>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Check-Out</strong>
+
+                                            <p>
+                                                <%= booking.checkOut.toLocaleDateString("en-IN") %>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Guests</strong>
+
+                                            <p>
+                                                <%= booking.guests %>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Total Nights</strong>
+
+                                            <p>
+                                                <%= booking.totalNights %>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between mb-2">
+
+                                        <span>
+
+                                            ₹<%= booking.pricePerNight.toLocaleString("en-IN") %>
+                                                ×
+                                                <%= booking.totalNights %>
+                                                    night(s)
+
+                                        </span>
+
+                                        <strong>
+
+                                            ₹<%= booking.subTotal.toLocaleString("en-IN") %>
+
+                                        </strong>
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-2">
+
+                                        <span>
+                                            GST (18%)
+                                        </span>
+
+                                        <strong>
+
+                                            ₹<%= booking.gst.toLocaleString("en-IN") %>
+
+                                        </strong>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between">
+
+                                        <h5>Total Paid</h5>
+
+                                        <h5 class="text-success">
+
+                                            ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+
+                                        </h5>
+
+                                    </div>
+
+                                    <% if(booking.status==="Pending" ) { %>
+
+                                        <div class="mt-4 text-end">
+
+                                            <form action="/bookings/<%= booking._id %>/cancel?_method=PATCH"
+                                                method="POST">
+
+                                                <button class="btn btn-outline-danger">
+                                                    <i class="fa-solid fa-ban me-2"></i>
+                                                    Cancel Booking
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                        <% } %>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <% }) %>
+
+                        <% } %>
+
+    </div>

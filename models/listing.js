@@ -17,6 +17,11 @@ const listingSchema = new Schema({
     price: {
         type: Number,
     },
+    maxGuests: {
+        type: Number,
+        required: true,
+        min: 1,
+    },
     location: {
         type: String,
     },

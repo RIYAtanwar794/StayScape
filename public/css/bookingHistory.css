@@ -1,0 +1,27 @@
+.booking-card {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.booking-img {
+    object-fit: cover;
+    width: 100%;
+    min-height: 320px;
+}
+
+.badge {
+    font-size: .9rem;
+    padding: 8px 14px;
+}
+
+.card-body strong {
+    font-weight: 600;
+}
+
+.card-body h3 {
+    font-weight: 700;
+}
+
+hr {
+    opacity: .15;
+}

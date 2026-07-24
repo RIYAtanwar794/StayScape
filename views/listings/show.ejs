@@ -51,6 +51,22 @@
                     </form>
                     <% } %>
 
+
+                        <% if(currUser && !listing.owner._id.equals(currUser._id)){ %>
+
+                            <div class="book-btn-wrapper">
+
+                                <a href="/listings/<%= listing._id %>/book" class="btn booking-btn">
+
+                                    <i class="fa-solid fa-calendar-check"></i>
+                                    Book This Stay
+
+                                </a>
+
+                            </div>
+
+                            <% } %>
+
             </div>
         </div>
 
@@ -145,4 +161,3 @@
                 <h3>Where you'll be</h3>
                 <div id="map"></div>
             </div>
-

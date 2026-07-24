@@ -47,6 +47,20 @@
                     </div>
 
                     <div class="mb-3">
+                            <label for="maxGuests" class="form-label">
+                                Maximum Guests
+                            </label>
+
+                            <input type="number" id="maxGuests" name="listing[maxGuests]" class="form-control" min="1"
+                                max="20" required>
+
+                            <div class="invalid-feedback">
+                                Please enter maximum guests.
+                            </div>
+                    </div>
+
+
+                    <div class="mb-3">
                         <label for="location" class="form-label"> Location </label>
                         <input name="listing[location]" placeholder="Jaipur , Rajasthan" type="text"
                             class="form-control" required />

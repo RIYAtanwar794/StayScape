@@ -1,0 +1,190 @@
+<% layout("/layouts/boilerplate") %>
+
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <div class="container booking-container py-4" data-price="<%= listing.price %>">
+
+        <!-- Back Button -->
+        <div class="mb-4">
+            <a href="/listings/<%= listing._id %>" class="btn btn-outline-dark">
+                ← Back to Listing
+            </a>
+        </div>
+
+        <!-- Heading -->
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Reserve Your Stay</h2>
+            <p class="text-muted">
+                Complete your booking details below.
+            </p>
+        </div>
+
+        <!-- Property Preview -->
+        <div class="card booking-preview-card mb-4 shadow-sm">
+
+            <img src="<%= listing.image.url %>" class="card-img-top booking-preview-img" alt="Listing Image">
+
+            <div class="card-body">
+
+                <h3 class="mb-3">
+                    <%= listing.title %>
+                </h3>
+
+                <p class="mb-2">
+                    📍
+                    <%= listing.location %>,
+                        <%= listing.country %>
+                </p>
+
+                <p class="mb-3">
+                    👤 Hosted by
+                    <strong>
+                        <%= listing.owner.username %>
+                    </strong>
+                </p>
+
+                <hr>
+
+                <h4 class="booking-price">
+                    ₹
+                    <%= listing.price.toLocaleString("en-IN") %>
+
+                        <small class="text-muted">
+                            / night
+                        </small>
+                </h4>
+
+            </div>
+
+        </div>
+
+        <!-- Booking Form -->
+        <form action="/listings/<%= listing._id %>/book" method="POST" class="needs-validation" novalidate>
+
+            <div class="card booking-details-card mb-4 shadow-sm">
+
+                <div class="card-body">
+
+                    <h4 class="mb-4">
+                        Booking Details
+                    </h4>
+
+                    <div class="mb-3">
+
+                        <label for="checkIn" class="form-label">
+                            Check-In
+                        </label>
+
+                        <input type="text" id="checkIn" name="booking[checkIn]" class="form-control"
+                            placeholder="Select Check-in Date" required>
+
+                        <div class="invalid-feedback">
+                            Please select check-in date.
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="checkOut" class="form-label">
+                            Check-Out
+                        </label>
+
+                        <input type="text" id="checkOut" name="booking[checkOut]" class="form-control"
+                            placeholder="Select Check-out Date" required>
+
+                        <div class="invalid-feedback">
+                            Please select check-out date.
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="guests" class="form-label">
+                            Guests
+                        </label>
+
+                        <select class="form-select" name="booking[guests]" required>
+                            <option value="">Select Guests</option>
+
+                            <% for(let i=1; i <=listing.maxGuests; i++) { %>
+                                <option value="<%= i %>">
+                                    <%= i %>
+                                        <%= i===1 ? "Guest" : "Guests" %>
+                                </option>
+                                <% } %>
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Please select number of guests.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Booking Summary -->
+
+            <div class="card booking-summary-card mb-4 shadow-sm">
+
+                <div class="card-body">
+
+                    <h4 class="mb-4">
+                        Booking Summary
+                    </h4>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Price / Night</span>
+                        <strong>
+                            ₹ <%= listing.price.toLocaleString("en-IN") %>
+                        </strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Total Nights</span>
+                        <strong id="totalNights">0</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Subtotal</span>
+                        <strong id="subTotal">₹0</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>GST (18%)</span>
+                        <strong id="gstAmount">₹0</strong>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <h5>Total</h5>
+                        <h5 id="totalPrice">₹0</h5>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="text-center mb-3 mt-3">
+
+                <button class="btn btn-dark booking-btn">
+                    Reserve Now
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        window.bookedDates = <%- JSON.stringify(bookedDates) %>;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="/js/booking.js"></script>

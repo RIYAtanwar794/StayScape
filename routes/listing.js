@@ -9,7 +9,10 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
+
 const listingController = require("../controllers/listing.js");
+const bookingController = require("../controllers/booking.js");
+const { validateBooking } = require("../middleware.js");
 
 
 router
@@ -43,6 +46,21 @@ router.route("/:id")
 
 //Edit Route
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
+
+
+
+// Booking Routes
+router
+    .route("/:id/book")
+    .get(
+        isLoggedIn,
+        wrapAsync(bookingController.renderBookingForm)
+    )
+    .post(
+        isLoggedIn,
+        validateBooking,
+        wrapAsync(bookingController.createBooking)
+    );
 
 
 

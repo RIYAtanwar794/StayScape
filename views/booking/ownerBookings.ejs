@@ -1,0 +1,225 @@
+<% layout("/layouts/boilerplate") %>
+
+    <link rel="stylesheet" href="/css/ownerBookings.css">
+
+    <div class="container py-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+                    Booking Requests
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Manage all bookings for your properties.
+                </p>
+
+            </div>
+
+        </div>
+
+        <% if(bookings.length===0){ %>
+
+            <div class="card shadow-sm border-0 text-center p-5">
+
+                <h3>No Booking Requests Yet</h3>
+
+                <p class="text-muted">
+                    Your properties haven't received any bookings yet.
+                </p>
+
+            </div>
+
+            <% } else { %>
+
+                <% bookings.forEach((booking)=>{ %>
+
+                    <div class="card shadow-sm border-0 mb-4 owner-booking-card">
+
+                        <div class="row g-0">
+
+                            <div class="col-md-4">
+
+                                <img src="<%= booking.listing.image.url %>" class="img-fluid owner-booking-img h-100"
+                                    alt="Listing Image">
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-between align-items-start">
+
+                                        <div>
+
+                                            <h3 class="mb-2">
+
+                                                <%= booking.listing.title %>
+
+                                            </h3>
+
+                                            <p class="text-muted">
+
+                                                📍
+                                                <%= booking.listing.location %>,
+                                                    <%= booking.listing.country %>
+
+                                            </p>
+
+                                        </div>
+
+                                        <span class="badge
+                                <%= booking.status==='Pending'
+                                ? 'bg-warning text-dark'
+                                : booking.status==='Confirmed'
+                                ? 'bg-success'
+                                : booking.status==='Completed'
+                                ? 'bg-primary'
+                                : 'bg-danger' %>">
+
+                                            <%= booking.status %>
+
+                                        </span>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Guest</strong>
+
+                                            <p>
+
+                                                <%= booking.user.username %>
+
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Guests</strong>
+
+                                            <p>
+
+                                                <%= booking.guests %>
+
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Check-In</strong>
+
+                                            <p>
+
+                                                <%= booking.checkIn.toLocaleDateString("en-IN") %>
+
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Check-Out</strong>
+
+                                            <p>
+
+                                                <%= booking.checkOut.toLocaleDateString("en-IN") %>
+
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Total Nights</strong>
+
+                                            <p>
+
+                                                <%= booking.totalNights %>
+
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <strong>Total Paid</strong>
+
+                                            <p class="fw-bold text-success">
+
+                                                ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <form action="/bookings/<%= booking._id %>/status?_method=PATCH" method="POST">
+
+                                        <div class="row align-items-center">
+
+                                            <div class="col-md-8">
+
+                                                <select name="status" class="form-select">
+
+                                                    <option value="Pending" <%=booking.status==="Pending" ? "selected"
+                                                        : "" %>>
+                                                        Pending
+                                                    </option>
+
+                                                    <option value="Confirmed" <%=booking.status==="Confirmed"
+                                                        ? "selected" : "" %>>
+                                                        Confirmed
+                                                    </option>
+
+                                                    <option value="Completed" <%=booking.status==="Completed"
+                                                        ? "selected" : "" %>>
+                                                        Completed
+                                                    </option>
+
+                                                    <option value="Cancelled" <%=booking.status==="Cancelled"
+                                                        ? "selected" : "" %>>
+                                                        Cancelled
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <button class="btn btn-dark w-100">
+                                                    Update Status
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <% }) %>
+
+                        <% } %>
+
+    </div>
