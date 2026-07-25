@@ -27,6 +27,15 @@ router
 
 
 
+// AI-description route
+router.post(
+    "/generate-description",
+    isLoggedIn,
+    listingController.generateAIDescription
+);
+
+
+
 //New Route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 

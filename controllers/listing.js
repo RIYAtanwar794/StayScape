@@ -1,6 +1,7 @@
 const Listing = require("../models/listing.js");
 const axios = require("axios");
 const User = require("../models/user.js");
+const generateDescription = require("../utils/gemini");
 
 
 module.exports.index = async (req, res) => {
@@ -201,4 +202,22 @@ module.exports.destroyListing = async (req, res) => {
 };
 
 
+
+module.exports.generateAIDescription = async (req, res) => {
+
+    try {
+        const description = await generateDescription(req.body);
+        res.json({
+            success: true,
+            description,
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            message: "Failed to generate description.",
+        });
+    }
+};
 
