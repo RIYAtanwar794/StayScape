@@ -3,6 +3,9 @@ const Listing = require("../models/listing.js");
 
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+const transporter = require("../utils/mailer");
+const bookingConfirmation = require("../emails/bookingConfirmation");
+const generateInvoice = require("../utils/generateInvoice");
 
 
 const razorpay = new Razorpay({
@@ -364,6 +367,23 @@ module.exports.verifyPayment = async (req, res) => {
     });
 
     await booking.save();
+
+    const pdfBuffer = await generateInvoice(booking, listing, req.user);
+
+    await transporter.sendMail({
+        from: `"StayScape" <${process.env.EMAIL_USER}>`,
+        to: req.user.email,
+        subject: "🏡 Booking Confirmed - StayScape",
+        html: bookingConfirmation(req.user, booking, listing),
+
+        attachments: [
+            {
+                filename: "StayScape-Invoice.pdf",
+                content: pdfBuffer,
+                contentType: "application/pdf",
+            },
+        ],
+    });
 
     res.json({
         success: true,
