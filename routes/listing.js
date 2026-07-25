@@ -64,4 +64,25 @@ router
 
 
 
+
+// Create Razorpay Order
+router.post(
+    "/:id/create-order",
+    isLoggedIn,
+    validateBooking,
+    wrapAsync(bookingController.createOrder)
+);
+
+
+
+
+// Verify Payment
+router.post(
+    "/verify-payment",
+    isLoggedIn,
+    wrapAsync(bookingController.verifyPayment)
+);
+
+
+
 module.exports = router;

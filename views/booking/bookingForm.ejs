@@ -60,7 +60,8 @@
         </div>
 
         <!-- Booking Form -->
-        <form action="/listings/<%= listing._id %>/book" method="POST" class="needs-validation" novalidate>
+        <form action="/listings/<%= listing._id %>/book" method="POST" id="bookingForm" class="needs-validation"
+            novalidate>
 
             <div class="card booking-details-card mb-4 shadow-sm">
 
@@ -172,8 +173,8 @@
 
             <div class="text-center mb-3 mt-3">
 
-                <button class="btn btn-dark booking-btn">
-                    Reserve Now
+                <button type="button" id="payBtn" class="btn btn-dark booking-btn">
+                    Pay & Reserve
                 </button>
 
             </div>
@@ -187,4 +188,7 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js"></script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <script src="/js/booking.js"></script>

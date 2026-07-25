@@ -47,8 +47,8 @@ function updateBookingSummary() {
     const grandTotal = subTotal + gst;
 
     subTotalElement.textContent = "₹" + subTotal.toLocaleString("en-IN");
-    gstAmountElement.textContent ="₹" + gst.toLocaleString("en-IN");
-    totalPriceElement.textContent ="₹" + grandTotal.toLocaleString("en-IN");
+    gstAmountElement.textContent = "₹" + gst.toLocaleString("en-IN");
+    totalPriceElement.textContent = "₹" + grandTotal.toLocaleString("en-IN");
 
 }
 
@@ -60,17 +60,12 @@ const disabledDates = [];
 window.bookedDates.forEach((booking) => {
 
     let current = new Date(booking.checkIn);
-
     const end = new Date(booking.checkOut);
 
     while (current < end) {
-
         disabledDates.push(new Date(current));
-
         current.setDate(current.getDate() + 1);
-
     }
-
 });
 
 
@@ -106,4 +101,109 @@ flatpickr("#checkIn", {
 
         updateBookingSummary();
     },
+});
+
+
+
+// Razorpay Payment
+const bookingForm = document.getElementById("bookingForm");
+const payBtn = document.getElementById("payBtn");
+
+payBtn.addEventListener("click", async () => {
+
+    if (!bookingForm.checkValidity()) {
+        bookingForm.reportValidity();
+        return;
+    }
+
+    payBtn.disabled = true;
+    payBtn.innerText = "Processing...";
+
+    const guestSelect = document.querySelector('select[name="booking[guests]"]');
+
+    const booking = {
+        checkIn: checkInInput.value,
+        checkOut: checkOutInput.value,
+        guests: guestSelect.value,
+    };
+
+
+    try {
+
+        const response = await fetch(
+            bookingForm.action.replace("/book", "/create-order"),
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ booking }),
+            }
+        );
+
+        const data = await response.json();
+
+        if (!data.success) {
+
+            alert(data.message);
+
+            payBtn.disabled = false;
+            payBtn.innerText = "Pay & Reserve";
+
+            return;
+        }
+
+        console.log("Order Created", data);
+
+        const options = {
+            key: data.key,
+            amount: data.order.amount,
+            currency: data.order.currency,
+            name: "StayScape",
+            description: "Booking Payment",
+            order_id: data.order.id,
+            handler: async function (response) {
+
+                const verifyRes = await fetch("/listings/verify-payment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        bookingData: data.bookingData,
+                    }),
+                });
+
+                const verifyData = await verifyRes.json();
+
+                if (verifyData.success) {
+                    window.location.href = verifyData.redirectUrl;
+                } else {
+                    alert("Payment verification failed.");
+                    payBtn.disabled = false;
+                    payBtn.innerText = "Pay & Reserve";
+                }
+
+            },
+
+            theme: {
+                color: "#000000",
+            },
+
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+        payBtn.disabled = false;
+        payBtn.innerText = "Pay & Reserve";
+
+    } catch (err) {
+        console.error(err);
+        alert("Something went wrong.");
+        payBtn.disabled = false;
+        payBtn.innerText = "Pay & Reserve";
+    }
 });

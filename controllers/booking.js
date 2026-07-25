@@ -1,6 +1,15 @@
 const Booking = require("../models/booking.js");
 const Listing = require("../models/listing.js");
 
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
+
+
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
 
 
 function calculateTotalNights(checkIn, checkOut) {
@@ -230,4 +239,136 @@ module.exports.cancelBooking = async (req, res) => {
     req.flash("success", "Booking cancelled successfully.");
 
     res.redirect("/bookings");
+};
+
+
+
+// Create Razorpay Order
+module.exports.createOrder = async (req, res) => {
+
+    console.log("========== CREATE ORDER ==========");
+    console.log(req.body);
+
+    const { id } = req.params;
+
+    const listing = await Listing.findById(id).populate("owner");
+
+    if (!listing) {
+        return res.status(404).json({
+            success: false,
+            message: "Listing not found.",
+        });
+    }
+
+    let { checkIn, checkOut, guests } = req.body.booking;
+
+    checkIn = new Date(checkIn);
+    checkOut = new Date(checkOut);
+
+    const totalNights = calculateTotalNights(checkIn, checkOut);
+
+    const available = await isListingAvailable(
+        listing._id,
+        checkIn,
+        checkOut
+    );
+
+    if (!available) {
+        return res.status(400).json({
+            success: false,
+            message: "Selected dates are unavailable.",
+        });
+    }
+
+    const subTotal = listing.price * totalNights;
+    const gst = Math.round(subTotal * 0.18);
+    const totalPrice = subTotal + gst;
+
+    const options = {
+        amount: totalPrice * 100, // paise
+        currency: "INR",
+        receipt: `booking_${Date.now()}`,
+    };
+
+    const order = await razorpay.orders.create(options);
+
+    res.json({
+        success: true,
+        order,
+        key: process.env.RAZORPAY_KEY_ID,
+        bookingData: {
+            listingId: listing._id,
+            checkIn,
+            checkOut,
+            guests,
+            totalNights,
+            subTotal,
+            gst,
+            totalPrice,
+            pricePerNight: listing.price,
+        },
+    });
+
+};
+
+
+
+// Verify Razorpay Payment
+module.exports.verifyPayment = async (req, res) => {
+
+    const {
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+        bookingData,
+    } = req.body;
+
+    const generatedSignature = crypto
+        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+        .digest("hex");
+
+    if (generatedSignature !== razorpay_signature) {
+        return res.status(400).json({
+            success: false,
+            message: "Payment verification failed.",
+        });
+    }
+
+    const listing = await Listing.findById(bookingData.listingId);
+
+    if (!listing) {
+        return res.status(404).json({
+            success: false,
+            message: "Listing not found.",
+        });
+    }
+
+
+    const booking = new Booking({
+        listing: listing._id,
+        user: req.user._id,
+        owner: listing.owner,
+        checkIn: bookingData.checkIn,
+        checkOut: bookingData.checkOut,
+        guests: bookingData.guests,
+        pricePerNight: bookingData.pricePerNight,
+        totalNights: bookingData.totalNights,
+        subTotal: bookingData.subTotal,
+        gst: bookingData.gst,
+        totalPrice: bookingData.totalPrice,
+        orderId: razorpay_order_id,
+        paymentId: razorpay_payment_id,
+        paymentStatus: "Paid",
+        status: "Pending",
+    });
+
+    await booking.save();
+
+    res.json({
+        success: true,
+        message: "Payment Successful",
+        redirectUrl: "/bookings",
+    });
+
 };
