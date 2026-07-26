@@ -318,72 +318,77 @@ module.exports.createOrder = async (req, res) => {
 
 // Verify Razorpay Payment
 module.exports.verifyPayment = async (req, res) => {
+    try {
+        const {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+            bookingData,
+        } = req.body;
 
-    const {
-        razorpay_order_id,
-        razorpay_payment_id,
-        razorpay_signature,
-        bookingData,
-    } = req.body;
+        const generatedSignature = crypto
+            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+            .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+            .digest("hex");
 
-    const generatedSignature = crypto
-        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-        .digest("hex");
+        if (generatedSignature !== razorpay_signature) {
+            return res.status(400).json({
+                success: false,
+                message: "Payment verification failed.",
+            });
+        }
 
-    if (generatedSignature !== razorpay_signature) {
-        return res.status(400).json({
-            success: false,
-            message: "Payment verification failed.",
+        const listing = await Listing.findById(bookingData.listingId);
+
+        if (!listing) {
+            return res.status(404).json({
+                success: false,
+                message: "Listing not found.",
+            });
+        }
+
+
+        const booking = new Booking({
+            listing: listing._id,
+            user: req.user._id,
+            owner: listing.owner,
+            checkIn: bookingData.checkIn,
+            checkOut: bookingData.checkOut,
+            guests: bookingData.guests,
+            pricePerNight: bookingData.pricePerNight,
+            totalNights: bookingData.totalNights,
+            subTotal: bookingData.subTotal,
+            gst: bookingData.gst,
+            totalPrice: bookingData.totalPrice,
+            orderId: razorpay_order_id,
+            paymentId: razorpay_payment_id,
+            paymentStatus: "Paid",
+            status: "Pending",
         });
-    }
 
-    const listing = await Listing.findById(bookingData.listingId);
+        await booking.save();
 
-    if (!listing) {
-        return res.status(404).json({
-            success: false,
-            message: "Listing not found.",
+        const pdfBuffer = await generateInvoice(booking, listing, req.user);
+
+        await transporter.sendMail({
+            from: `"StayScape" <${process.env.EMAIL_USER}>`,
+            to: req.user.email,
+            subject: "🏡 Booking Confirmed - StayScape",
+            html: bookingConfirmation(req.user, booking, listing),
+
+            attachments: [
+                {
+                    filename: "StayScape-Invoice.pdf",
+                    content: pdfBuffer,
+                    contentType: "application/pdf",
+                },
+            ],
         });
+    } catch (err) {
+
+        console.log("EMAIL ERROR:", err);
+
     }
-
-
-    const booking = new Booking({
-        listing: listing._id,
-        user: req.user._id,
-        owner: listing.owner,
-        checkIn: bookingData.checkIn,
-        checkOut: bookingData.checkOut,
-        guests: bookingData.guests,
-        pricePerNight: bookingData.pricePerNight,
-        totalNights: bookingData.totalNights,
-        subTotal: bookingData.subTotal,
-        gst: bookingData.gst,
-        totalPrice: bookingData.totalPrice,
-        orderId: razorpay_order_id,
-        paymentId: razorpay_payment_id,
-        paymentStatus: "Paid",
-        status: "Pending",
-    });
-
-    await booking.save();
-
-    const pdfBuffer = await generateInvoice(booking, listing, req.user);
-
-    await transporter.sendMail({
-        from: `"StayScape" <${process.env.EMAIL_USER}>`,
-        to: req.user.email,
-        subject: "🏡 Booking Confirmed - StayScape",
-        html: bookingConfirmation(req.user, booking, listing),
-
-        attachments: [
-            {
-                filename: "StayScape-Invoice.pdf",
-                content: pdfBuffer,
-                contentType: "application/pdf",
-            },
-        ],
-    });
 
     res.json({
         success: true,
