@@ -12,13 +12,18 @@ StayScape is a full-stack property listing platform that enables users to discov
 
 - 🔐 **Authentication & Authorization** — Secure signup/login with role-based ownership checks
 - 🏠 **Listings CRUD** — Create, edit, and delete property listings
+- 📅 **Booking System** — Book properties with date selection, guest management, and booking history
+- 💳 **Razorpay Payments** — Secure online payments with backend payment verification
+- 📧 **Booking Confirmation Emails** — Responsive HTML email sent automatically after successful booking
+- 📄 **PDF Invoice Generation** — Professional invoice attached with every booking confirmation email
+- ✨ **AI Description Generator** — Generate Airbnb-style listing descriptions using Google Gemini AI
 - ⭐ **Reviews & Ratings** — Add and manage reviews with star ratings
 - ❤️ **Wishlist** — Save favorite property listings for quick access
-- 📊 **Dashboard** — Manage personal property listings and wishlist
+- 📊 **Dashboard** — Manage personal property listing, bookings and wishlist
 - 🗺️ **Interactive Maps** — Property locations powered by Leaflet
 - ☁️ **Cloudinary Uploads** — Secure image hosting and optimization
 - 📑 **Pagination & Filtering** — Server-side pagination with category filters and search
-- 📱 **Responsive UI** — Responsive design optimized for desktop and mobile devices
+- 📱 **Responsive UI** — Responsive design optimized for desktop, tablet, and mobile devices
 - 🌐 **Deployment** — Deployed on Render with MongoDB Atlas
 
 
@@ -28,7 +33,12 @@ StayScape is a full-stack property listing platform that enables users to discov
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB Atlas, Mongoose
 - **Authentication:** Passport.js, Express Session
-- **Integrations:** Cloudinary (Image Storage), Leaflet (Interactive Maps)
+- **File Uploads:** Multer, Cloudinary
+- **Maps:** Leaflet
+- **Payments:** Razorpay
+- **AI:** Google Gemini API
+- **Email Service:** Resend
+- **PDF Generation:** PDFKit
 - **Deployment:** Render
 - **Version Control:** Git & GitHub
 
