@@ -49,9 +49,9 @@ StayScape is a full-stack property listing platform that enables users to discov
 - **File Uploads:** Multer, Cloudinary
 - **Maps:** Leaflet, OpenStreetMap
 - **Payments:** Razorpay
-- **AI:** Google Gemini API
-- **Email Service:** Resend
-- **PDF Generation:** PDFKit
+- **AI Integration:** Google Gemini API
+- **Transactional Emails:** Resend
+- **Invoice Generation:** PDFKit
 - **Deployment:** Render
 - **Version Control:** Git & GitHub
 
