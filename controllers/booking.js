@@ -3,7 +3,7 @@ const Listing = require("../models/listing.js");
 
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
-const transporter = require("../utils/mailer");
+const resend = require("../utils/resend");
 const bookingConfirmation = require("../emails/bookingConfirmation");
 const generateInvoice = require("../utils/generateInvoice");
 
@@ -370,24 +370,24 @@ module.exports.verifyPayment = async (req, res) => {
 
         const pdfBuffer = await generateInvoice(booking, listing, req.user);
 
-        await transporter.sendMail({
-            from: `"StayScape" <${process.env.EMAIL_USER}>`,
-            to: req.user.email,
+        await resend.emails.send({
+            from: "StayScape <onboarding@resend.dev>",
+            to: process.env.TEST_EMAIL,
             subject: "🏡 Booking Confirmed - StayScape",
-            html: bookingConfirmation(req.user, booking, listing),
-
+            html: bookingConfirmation(
+                req.user,
+                booking,
+                listing
+            ),
             attachments: [
                 {
                     filename: "StayScape-Invoice.pdf",
                     content: pdfBuffer,
-                    contentType: "application/pdf",
-                },
-            ],
+                }
+            ]
         });
     } catch (err) {
-
         console.log("EMAIL ERROR:", err);
-
     }
 
     res.json({
