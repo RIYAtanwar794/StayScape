@@ -3,6 +3,7 @@
 StayScape is a full-stack property listing platform that enables users to discover, list, and manage accommodations through a secure and responsive web application. Built using the **MVC (Model–View–Controller)** architecture, it provides a secure and responsive experience with authentication, property management, interactive maps, wishlists, reviews, and cloud-based image storage.
 
 
+
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-black?logo=express)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)
@@ -12,6 +13,7 @@ StayScape is a full-stack property listing platform that enables users to discov
 ![Razorpay](https://img.shields.io/badge/Razorpay-02042B?logo=razorpay)
 ![Gemini AI](https://img.shields.io/badge/Gemini-AI-4285F4)
 ![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white)
+
 
 
 ## 🌐 Live Demo
