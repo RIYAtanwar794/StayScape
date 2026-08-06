@@ -104,7 +104,9 @@ RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 GEMINI_API_KEY=your_google_gemini_api_key
 
 RESEND_API_KEY=your_resend_api_key
-EMAIL_USER=your_verified_email
+TEST_EMAIL=your_verified_email
+
+GEOAPIFY_API_KEY=your_geoapify_key
 ```
 
 ### 4️⃣ Start the application
