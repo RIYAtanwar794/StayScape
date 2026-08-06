@@ -23,21 +23,21 @@ StayScape is a full-stack property listing platform that enables users to discov
 
 ## ✨ Features
 
-- 🔐 **Authentication & Authorization** — Secure signup/login with role-based ownership checks
-- 🏠 **Listings CRUD** — Create, edit, and delete property listings
-- 📅 **Booking System** — Book properties with date selection, guest management, and booking history
-- 💳 **Razorpay Payments** — Secure online payments with backend payment verification
-- 📧 **Booking Confirmation Emails** — Responsive HTML email sent automatically after successful booking
-- 📄 **PDF Invoice Generation** — Professional invoice attached with every booking confirmation email
-- ✨ **AI Description Generator** — Generate Airbnb-style listing descriptions using Google Gemini AI
-- ⭐ **Reviews & Ratings** — Add and manage reviews with star ratings
-- ❤️ **Wishlist** — Save favorite property listings for quick access
-- 📊 **Dashboard** — Manage personal property listing, bookings and wishlist
-- 🗺️ **Interactive Maps** — Property locations powered by Leaflet
-- ☁️ **Cloudinary Uploads** — Secure image hosting and optimization
-- 📑 **Pagination & Filtering** — Server-side pagination with category filters and search
-- 📱 **Responsive UI** — Responsive design optimized for desktop, tablet, and mobile devices
-- 🌐 **Deployment** — Deployed on Render with MongoDB Atlas
+- **Authentication & Authorization** — Secure signup/login with role-based ownership checks
+- **Listings CRUD** — Create, edit, and delete property listings
+- **Booking System** — Book properties with date selection, guest management, and booking history
+- **Razorpay Payments** — Secure online payments with backend payment verification
+- **Booking Confirmation Emails** — Responsive HTML email sent automatically after successful booking
+- **PDF Invoice Generation** — Professional invoice attached with every booking confirmation email
+- **AI Description Generator** — Generate Airbnb-style listing descriptions using Google Gemini AI
+- **Reviews & Ratings** — Add and manage reviews with star ratings
+- **Wishlist** — Save favorite property listings for quick access
+- **Dashboard** — Manage personal property listing, bookings and wishlist
+- **Interactive Maps** — Property locations powered by Leaflet
+- **Cloudinary Uploads** — Secure image hosting and optimization
+- **Pagination & Filtering** — Server-side pagination with category filters and search
+- **Responsive UI** — Responsive design optimized for desktop, tablet, and mobile devices
+- **Deployment** — Deployed on Render with MongoDB Atlas
 
 
 ## 🛠️ Tech Stack
@@ -68,3 +68,59 @@ This project follows the MVC (Model–View–Controller) architecture to ensure 
 - Real-time availability calendar
 - In-app chat between host and guest
 - Personalized property recommendations
+
+
+## 🚀 Installation & Setup
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/RIYAtanwar794/StayScape.git
+cd StayScape
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Create a `.env` file
+
+Create a `.env` file in the project root and add the following environment variables:
+
+```env
+ATLASDB_URL=your_mongodb_connection_string
+
+SECRET=your_session_secret
+
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
+
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+
+GEMINI_API_KEY=your_google_gemini_api_key
+
+RESEND_API_KEY=your_resend_api_key
+EMAIL_USER=your_verified_email
+```
+
+### 4️⃣ Start the application
+
+```bash
+npm start
+```
+
+or (if using nodemon)
+
+```bash
+npm run dev
+```
+
+### 5️⃣ Open in browser
+
+```
+http://localhost:8080
+```
