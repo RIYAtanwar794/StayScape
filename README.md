@@ -75,7 +75,7 @@ This project follows the MVC (Model–View–Controller) architecture to ensure 
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/RIYAtanwar794/StayScape.git
+git clone https://github.com/RIYAtanwar794/StayScape
 cd StayScape
 ```
 
